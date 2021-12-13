@@ -26,7 +26,7 @@ var defs = svgContainer.append("defs");
 var filter = defs.append("filter")
    .attr("id","glow");
 filter.append("feGaussianBlur")
-   .attr("stdDeviation","6");
+   .attr("stdDeviation","3");
 
 // heavy blur
 var filter2 = defs.append("filter")
