@@ -6,7 +6,13 @@ var bgcolor = '#E5E5E5'
 
 // color randomizer
 function getColor() {
-  return "hsl(" + Math.random() * 360 + ",75%,45%)";
+  var hueval = Math.random() * 360;
+  if (hueval >= 220 && hueval <= 360) {
+    return "hsl(" + hueval + ",95%,65%)"
+  }
+  else {
+    return "hsl(" + hueval + ",75%,45%)"
+  }
 }
 
 // generate random number between 2 values
@@ -40,7 +46,7 @@ svgContainer
 
 // blobs
 
-var numBlobs = getRandomNum(2,4)
+var numBlobs = getRandomNum(2,5)
 // var numBlobs = 1;
 
 var dataset = Array.from({length: numBlobs}, () => getColor());
@@ -53,11 +59,8 @@ var circles = svgContainer.selectAll("circle")
     .attr("id", function(d,i) {
       return "circle" + i
     })
-    // .style("fill", function(d, i) {
-    //   return dataset[i];
-    // })
     .attr("r", function(d, i) {
-      return getRandomNum(200,300);
+      return getRandomNum(175,275);
     })
     .attr("cx", function(d, i) {
       return getRandomNum(-40,40);
@@ -65,7 +68,7 @@ var circles = svgContainer.selectAll("circle")
     .attr("cy", function(d, i) {
       return getRandomNum(-40,40);
     })
-    .style("opacity",.8);
+    .style("opacity",.75);
 
 
 
@@ -73,16 +76,13 @@ for (i=0; i<numBlobs; i++) {
 console.log("entering blob iteration " + i);
   var gradientName = "gradient" + i;
   var orbColor = getColor();
+  console.log(orbColor);
   // create radial gradient element
   var gradient = defs.append("radialGradient")
     .attr("id",gradientName)
   gradient.append("stop")
     .attr("offset","20%")
     .attr("stop-color",orbColor)
-  // gradient.append("stop")
-    // .attr("offset","90%")
-    // .attr("stop-color",orbColor)
-    // .attr("stop-opacity","0%")
   gradient.append("stop")
     .attr("offset","35%")
     .attr("stop-color",orbColor)
@@ -93,11 +93,5 @@ console.log("entering blob iteration " + i);
 
 
   svgContainer.select("#circle" + i)
-  // .style("filter","url(#shadow)");
     .style("fill","url(#gradient" + i + ")")
 }
-
-//
-// circles
-// // .style("filter","url(#shadow)");
-// .style("fill","url(#gradient" + i + ")")
