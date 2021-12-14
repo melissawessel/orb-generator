@@ -1,12 +1,14 @@
 // Configuration
-var width = 500;
-var height = 500;
-
+var width = Math.min(window.innerWidth, window.innerHeight);
+var height = Math.min(window.innerWidth, window.innerHeight);
 var bgcolor = '#E5E5E5'
+
+console.log(fxhash);
+console.log(fxrand());
 
 // color randomizer
 function getColor() {
-  var hueval = Math.random() * 360;
+  var hueval = fxrand() * 360;
   if (hueval >= 220 && hueval <= 360) {
     return "hsl(" + hueval + ",95%,65%)"
   }
@@ -17,7 +19,7 @@ function getColor() {
 
 // generate random number between 2 values
 function getRandomNum(min, max) {
-  return Math.random() * (max - min) + min;
+  return fxrand() * (max - min) + min;
 }
 
 // create Container
@@ -60,13 +62,13 @@ var circles = svgContainer.selectAll("circle")
       return "circle" + i
     })
     .attr("r", function(d, i) {
-      return getRandomNum(175,275);
+      return getRandomNum(width/3,width/2);
     })
     .attr("cx", function(d, i) {
-      return getRandomNum(-40,40);
+      return getRandomNum(width/-12,width/12);
     })
     .attr("cy", function(d, i) {
-      return getRandomNum(-40,40);
+      return getRandomNum(width/-12,width/12);
     })
     .style("opacity",.75);
 
